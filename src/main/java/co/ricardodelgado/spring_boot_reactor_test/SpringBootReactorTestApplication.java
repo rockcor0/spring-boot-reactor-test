@@ -8,6 +8,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import reactor.core.publisher.Flux;
 
+import java.util.List;
+
 @SpringBootApplication
 public class SpringBootReactorTestApplication implements CommandLineRunner {
 
@@ -21,6 +23,14 @@ public class SpringBootReactorTestApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		//Create an observable
+
+		//From a List
+		Flux<String> fromList = Flux.fromIterable(List.of(args));
+
+		//From an array
+		Flux<String> fromString = Flux.fromArray(args);
+
+		//From some data
 		Flux<User> names = Flux.just("Richie", "Lilly", "Isa", "Gandalf", "Arya", "Zelda")
 				.map(name -> new User(name, null))
 				.doOnNext(user -> {
